@@ -1,0 +1,84 @@
+/* ============================================================
+   Hero Section — Background Image
+   ============================================================ */
+
+/* Wrapper that fills the hero and positions the bg image */
+.hero-bg-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* The actual background image */
+.hero-bg-img {
+  position: absolute;
+  top: 10%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  width:50%;          /* fill most of the hero width */
+  max-width: 860px;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  opacity: .5;       /* very subtle — enhances without distracting */
+  filter: grayscale(10%) contrast(1.05);
+  transition: opacity 0.4s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Radial vignette that fades the image softly into the white bg */
+.hero-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 65% at 50% 50%,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 65%,
+    rgba(255, 255, 255, 0.92) 85%,
+    #ffffff 100%
+  );
+  pointer-events: none;
+}
+
+/* Make sure all content inside the hero sits above the bg layers */
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 768px) {
+  .hero-bg-img {
+    width: 110%;        /* let it bleed wider on mobile for coverage */
+    max-width: none;
+    opacity: 0.10;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-bg-img {
+    width: 140%;
+    opacity: 0.08;
+  }
+}
+
+/* ── Left-hand responsive ── */
+@media (max-width: 768px) {
+  /* Shrink the hand a bit on tablet */
+  [src="/left-hand.png"] {
+    width: 52% !important;
+    opacity: 0.65 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hide entirely on small mobile — too cramped */
+  [src="/left-hand.png"] {
+    display: none !important;
+  }
+}
