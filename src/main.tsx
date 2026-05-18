@@ -1,5 +1,6 @@
-import { StrictMode, useEffect } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+// @ts-ignore
 import '@fontsource-variable/space-grotesk'
 import Lenis from 'lenis'
 import './index.css'

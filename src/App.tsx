@@ -10,6 +10,7 @@ import Discover from './components/Discover'
 import About from './components/About'
 import Services from './components/Services'
 import Work from './components/Work'
+import Experiences from './components/Experiences'
 import GitHubContributionSection from './components/github/GitHubContributionSection'
 import FAQs from './components/FAQs'
 import Testimonials from './components/Testimonials'
@@ -34,6 +35,7 @@ const HomePage: React.FC<{ isLoading: boolean }> = ({ isLoading }) => (
       <About />
       <Services />
       <Work />
+      <Experiences />
       <GitHubContributionSection />
       <FAQs />
       <Testimonials />

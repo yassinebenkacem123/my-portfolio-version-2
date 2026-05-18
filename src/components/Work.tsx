@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ExternalLink, Database, ArrowRight, Server, Layout, Code } from 'lucide-react'
+import { Database, ArrowRight, Server, Layout, Code } from 'lucide-react'
 
 const Github = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -46,6 +46,7 @@ const projects: ProjectCardData[] = [
     status: "Production Ready",
     featureText: "AI Integration",
     FeatureIcon: Server,
+    linkedinVideo:"https://www.linkedin.com/posts/yassine-ben-kacem-791150316_springboot-springai-java-activity-7426415479927447552-FREL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAchV0BiiDo67jzBZMxnJO78qr6Vian7QU",
     githubLink: "https://github.com/yassinet-1/Open-Source-Ai-Chat-Bot"
     },
   {
@@ -56,7 +57,9 @@ const projects: ProjectCardData[] = [
     description: "Interactive memory matching game featuring smooth animations, state management, and responsive design.",
     status: "Live Demo",
     featureText: "Interactive UI",
-    FeatureIcon: Layout
+    FeatureIcon: Layout,
+    linkedinVideo:"https://www.linkedin.com/posts/yassine-ben-kacem-791150316_exciting-news-im-thrilled-to-announce-activity-7311501409164701697-BYU_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAchV0BiiDo67jzBZMxnJO78qr6Vian7QU",
+    githubLink:"https://github.com/yassinebenkacem123/memory-card-game"
   },
   {
     name: 'Vanlife Project',
@@ -67,18 +70,19 @@ const projects: ProjectCardData[] = [
     status: "Live Demo",
     featureText: "Frontend UI",
     FeatureIcon: Layout,
-    githubLink: "https://github.com/yassinet-1/Project_VanLife"
+    githubLink: "https://github.com/yassinebenkacem123/react-vanslife-project",
+    linkedinVideo: "https://www.linkedin.com/posts/yassine-ben-kacem-791150316_react-html-css-activity-7292997502318837763-yHaD?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAchV0BiiDo67jzBZMxnJO78qr6Vian7QU"
   },
   {
     name: 'Smart Code',
     category: 'Web Dev',
     image: '/projects/web-dev/smartCode.png',
     stackUsed: ["React.js", "Express", "MySQL", "TypeScript"],
-    description: "Full-stack code sharing platform allowing users to save, share, and discover code snippets securely.",
+    description: "Full-stack e-learning platform for teaching and learning programming",
     status: "Production Ready",
     featureText: "REST API",
     FeatureIcon: Database,
-    linkedinVideo: "https://www.youtube.com/watch?v=Q9i48n3wUek&t=341s"
+    githubLink:"https://github.com/yassinebenkacem123/smart-code-web-site"
   },
   {
     name: 'ShareStartup',
@@ -87,8 +91,8 @@ const projects: ProjectCardData[] = [
     stackUsed: ["Next.js", "Sanity", "RabbitMQ", "Tailwind"],
     description: "Platform for discovering and sharing startup ideas, built with modern server-side rendering and headless CMS.",
     status: "Production Ready",
-    featureText: "Microservices",
-    FeatureIcon: Server
+    FeatureIcon: Server,
+    featureText: "Next.js 16",
   },
   {
     name: 'Shoes-Store',
@@ -98,7 +102,9 @@ const projects: ProjectCardData[] = [
     description: "Modern e-commerce frontend for a sneaker store featuring dynamic cart management and product filtering.",
     status: "Live Demo",
     featureText: "E-Commerce",
-    FeatureIcon: Code
+    FeatureIcon: Code,
+    linkedinVideo:"https://www.linkedin.com/posts/yassine-ben-kacem-791150316_react-ensaf-tailwind-activity-7292995105081229313-ZPkz?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAchV0BiiDo67jzBZMxnJO78qr6Vian7QU",
+    githubLink:"https://github.com/yassinebenkacem123/snake-shoes-brand"
   },
   {
     name: 'Morocco Booking',
@@ -108,7 +114,8 @@ const projects: ProjectCardData[] = [
     description: "Full-stack hotel booking platform featuring interactive 3D elements, user authentication, and booking management.",
     status: "Production Ready",
     featureText: "REST API",
-    FeatureIcon: Database
+    FeatureIcon: Server,
+  
   },
   {
     name:'Perlica For Tours And Travel',
@@ -119,6 +126,19 @@ const projects: ProjectCardData[] = [
     status:"Production Ready",
     featureText:"REST API",
     FeatureIcon: Server,
+    githubLink:"https://github.com/impactteamtech/Perlica",
+    
+  },
+  {
+    name:"ensaf clubs",
+    category:"Web Dev",
+    image:"/projects/web-dev/ensaf.png",
+    stackUsed:["React.js", "Tailwind CSS", "Framer Motion"],
+    description:"ensaf clubs is a platform built for ENSAF (national school of applied sciences in fes) to manage and organize its clubs and events within the school .",
+    status:"Production Ready",
+    featureText:"REST API",
+    FeatureIcon: Server,
+    linkedinVideo:"https://www.linkedin.com/posts/yassine-ben-kacem-791150316_ensa-ensaf-ensafes-activity-7366538345897799680-FR03?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFAchV0BiiDo67jzBZMxnJO78qr6Vian7QU"
   }
 ]
 
@@ -171,12 +191,7 @@ const ProjectCard: React.FC<{ data: ProjectCardData; index: number }> = ({ data,
               <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
             </a>
           )}
-          <a
-            href="#projects"
-            className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/10 bg-[#161616] hover:bg-white/10 transition-colors"
-          >
-            <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
-          </a>
+       
         </div>
       </div>
 
@@ -185,7 +200,7 @@ const ProjectCard: React.FC<{ data: ProjectCardData; index: number }> = ({ data,
         <img
           src={data.image}
           alt={data.name}
-          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full transition-transform duration-700 group-hover:scale-105"
         />
         {/* Subtle overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-0 transition-opacity duration-500" />
