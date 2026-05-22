@@ -44,6 +44,12 @@ const EXPERIENCES: Experience[] = [
     number: '6',
     title: 'Coding Challenge at UPF',
     description: 'Competed in a rigorous programming challenge at UPF University. This high-pressure environment sharpened my algorithmic problem-solving abilities and competitive programming mindset.'
+  },
+  {
+    id:'7',
+    number:'7',
+    title:'Web Developer extern at impact team community.',
+    description:'Working with experienced developers to create a responsive and user-friendly website.',
   }
 ]
 
@@ -53,6 +59,7 @@ const Experiences: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
+
     <section
       id="experiences"
       className="w-full flex justify-center overflow-visible"
@@ -109,7 +116,7 @@ const Experiences: React.FC = () => {
             }}
           >
             <img 
-              src="/discover.png" 
+              src="/experience.png" 
               alt="Experience" 
               className="w-full h-full object-cover opacity-80 filter grayscale transition-transform duration-700 hover:scale-105" 
             />

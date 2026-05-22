@@ -41,39 +41,10 @@ const Contact: React.FC = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative flex flex-col items-center justify-center overflow-hidden w-full"
+      className="relative flex flex-col h-screen items-center justify-center overflow-hidden w-full"
       style={{ backgroundColor: '#000000' }}
     >
-      {/* ── Structural Tree Image with Breathing Glow ── */}
-      <div className="w-full relative z-0 pointer-events-none">
-        {/* Base crisp tree */}
-        <img
-          src="/discover.png"
-          alt=""
-          className="w-full h-auto object-cover pointer-events-none"
-          style={{
-            opacity: 0.25,
-            filter: 'invert(1) grayscale(1) brightness(0.9) contrast(1.5)',
-            mixBlendMode: 'screen'
-          }}
-        />
-        {/* Soft breathing halo/glow effect */}
-        <motion.img
-          src="/discover.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-          animate={{ opacity: [0, 0.45, 0] }}
-          transition={{
-            duration: 3.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          style={{
-            filter: 'invert(1) grayscale(1) brightness(1.2) contrast(1.5) blur(12px)',
-            mixBlendMode: 'screen'
-          }}
-        />
-      </div>
+    
 
       {/* Edge fade gradients to seamlessly blend the top and bottom into the surrounding sections */}
       <div
