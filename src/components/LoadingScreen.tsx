@@ -100,7 +100,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
           userSelect:    'none',
         }}
       >
-        Portfolio
+        YASSINE BEN KACEM
       </motion.div>
 
       {/* ── Element 2: Rotating words — center ── */}

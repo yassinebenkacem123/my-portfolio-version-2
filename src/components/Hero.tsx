@@ -331,8 +331,6 @@ const Hero: React.FC = () => {
         id="hero-section"
         style={{
           position: 'relative',
-          width: '100%',
-          height:'95vh',
           display: 'flex',
           justifyContent: 'center',
           overflowX: 'hidden',
@@ -340,6 +338,7 @@ const Hero: React.FC = () => {
           paddingTop: 100,
           paddingBottom: 80,
         }}
+        className=' w-full mb-4 lg:mb-0'
       >
         {/* ── Background image layer ── */}
         <div className="hero-bg-wrap" aria-hidden="true">
@@ -358,11 +357,13 @@ const Hero: React.FC = () => {
             draggable={false}
             className={[
               /* positioning */
-              'absolute', 'bottom-0', 'left-0',
+              'hidden',
+              'md:block',
+              'md:absolute', 'md:bottom-0', 'md:left-0',
               /* sizing — ~40% of hero width, capped */
-              'w-[38%]', 'max-w-[550px]', 'h-auto',
+              'md:w-[38%]', 'md:max-w-[550px]', 'md:h-auto',
               /* push it slightly off-screen left so it looks naturally cropped */
-              '-translate-x-[22%]', 'translate-y-[8%]',
+              'md:-translate-x-[22%]', 'md:translate-y-[8%]',
               /* blend the solid-black bg away on white */
               'mix-blend-mode-multiply',
               /* subtle opacity — hand is accent, not focal point */

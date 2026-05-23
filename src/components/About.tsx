@@ -214,15 +214,12 @@ const About: React.FC = () => {
             </a>
           </div>
 
-          {/* KPI Cards — 3-column grid, height 400px, maxWidth 780 */}
+          {/* KPI Cards — responsive grid, height 400px on desktop, auto on mobile */}
           <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:h-[400px] w-full"
             style={{
               flex: '1 1 500px',
               maxWidth: 780,
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 20,
-              height: 400,
               minWidth: 0,
             }}
           >
