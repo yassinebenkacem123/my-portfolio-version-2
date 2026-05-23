@@ -7,7 +7,7 @@ const RotatingHeroBadge: React.FC = () => {
   
   return (
     <motion.div
-      className="absolute top-0 left-10 xl:left-0 z-10 flex items-center justify-center cursor-pointer"
+      className="absolute top-18 lg:top-0 left-10 xl:left-0 z-10 flex items-center justify-center cursor-pointer"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
