@@ -15,6 +15,7 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:4173',
   'https://my-portfolio-version-2.vercel.app',
+  'https://www.yassinebenkacem.me'
 ]
 
 app.use(cors({
