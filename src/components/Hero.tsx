@@ -406,6 +406,25 @@ const Hero: React.FC = () => {
             </div>
             {/* ── LabelTitle block — exact Framer layout ── */}
             <div style={{ position: 'relative', width: '100%' }}>
+              {/* Premium small brand tag */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.02, ease: EASE }}
+                className="text-center mb-2"
+              >
+                <span style={{
+                  fontSize: 13,
+                  fontWeight: 600,
+                  letterSpacing: '0.35em',
+                  textTransform: 'uppercase',
+                  color: 'rgb(102,102,102)',
+                  display: 'inline-block',
+                  fontFamily: 'var(--font-space-grotesk), sans-serif',
+                }}>
+                  Yassine Ben Kacem
+                </span>
+              </motion.div>
 
 
 
