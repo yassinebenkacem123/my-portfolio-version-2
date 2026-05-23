@@ -85,27 +85,18 @@ const Discover: React.FC = () => {
        * padding: 48px 100px each side
        */}
       <div
+        className="w-full h-auto min-h-[750px] md:h-[800px] rounded-[24px] flex justify-center items-stretch py-12 px-6 md:px-24"
         style={{
-          width: '100%',
-          height: 800,
-          borderRadius: 24,
           backgroundImage: `url(${BG})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           overflow: 'hidden',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'stretch',
-          padding: '48px 100px',
         }}
       >
         {/* Inner container max-1080, full height, space-between */}
         <div
-          className="portfolio-container flex flex-col"
+          className="portfolio-container flex flex-col justify-between h-full w-full gap-16 md:gap-[120px]"
           style={{
-            justifyContent: 'space-between',
-            height: '100%',
-            gap: 120,
             padding: 0,
           }}
         >
