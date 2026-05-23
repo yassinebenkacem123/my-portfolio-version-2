@@ -50,6 +50,7 @@ const FAQItem: React.FC<{ faq: FAQ; isOpen: boolean; onToggle: () => void }> = (
   onToggle,
 }) => (
   <div
+    id="faq"
     className="border-t border-neutral-200 transition-colors duration-300 hover:bg-neutral-50/50"
   >
     <button

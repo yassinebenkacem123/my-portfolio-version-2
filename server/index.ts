@@ -27,7 +27,10 @@ app.use('/api/contact', contactRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
-
+app.get('/test', (req,res)=> res.json({
+  status:true,
+  message:"API Server is runing..."
+})) 
 app.listen(PORT, () => {
   console.log(`🚀 API server running on http://localhost:${PORT}`)
 })

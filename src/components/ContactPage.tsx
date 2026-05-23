@@ -217,7 +217,7 @@ const ContactPage: React.FC = () => {
       style={{ minHeight: '100vh', backgroundColor: 'rgb(15,15,15)', position: 'relative', overflowX: 'hidden' }}
     >
       {/* ── Back button ─────────────────────────────────────────────────────── */}
-      <div className="portfolio-container" style={{ paddingTop: 100, paddingBottom: 40 }}>
+      <div className="w-full max-w-[1080px] px-5 sm:px-8 md:px-10 mx-auto" style={{ paddingTop: 100, paddingBottom: 40 }}>
         <motion.button
           initial={{ opacity: 0, x: -16 }}
           animate={{ opacity: 1, x: 0 }}
@@ -240,7 +240,7 @@ const ContactPage: React.FC = () => {
         </motion.button>
       </div>
 
-      <div className="portfolio-container" style={{ paddingBottom: 120 }}>
+      <div className="w-full max-w-[1080px] px-5 sm:px-8 md:px-10 mx-auto" style={{ paddingBottom: 120 }}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -258,7 +258,7 @@ const ContactPage: React.FC = () => {
               <h1
                 style={{
                   fontFamily: 'Space Grotesk Variable, Space Grotesk, sans-serif',
-                  fontSize: 'clamp(52px, 8vw, 100px)',
+                  fontSize: 'clamp(40px, 8vw, 100px)',
                   fontWeight: 500,
                   letterSpacing: '-0.04em',
                   lineHeight: 1.0,
@@ -272,7 +272,7 @@ const ContactPage: React.FC = () => {
               <h1
                 style={{
                   fontFamily: "'Instrument Serif', Georgia, serif",
-                  fontSize: 'clamp(52px, 8vw, 100px)',
+                  fontSize: 'clamp(40px, 8vw, 100px)',
                   fontWeight: 400,
                   fontStyle: 'italic',
                   letterSpacing: '-0.03em',
@@ -306,7 +306,7 @@ const ContactPage: React.FC = () => {
             {/* ── Right — contact form ─────────────────────────────────────── */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col gap-6 p-7 rounded-3xl"
+              className="flex flex-col gap-6 p-5 sm:p-7 rounded-3xl"
               style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
               {sent ? (
