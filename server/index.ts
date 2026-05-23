@@ -10,14 +10,33 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 3001
 
-// Allow requests from the Vite dev server and production domain
+// Dynamic CORS configuration allowing localhost and production domains
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:4173',
+  'https://my-portfolio-version-2.vercel.app',
+]
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:4173',
-    'https://my-portfolio-version-2.vercel.app',
-    process.env.FRONTEND_URL, // set this in production
-  ].filter(Boolean) as string[],
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like curl, postman, server-to-server, or local dev tools)
+    if (!origin) return callback(null, true);
+    
+    const isAllowed = allowedOrigins.includes(origin) || 
+                      (process.env.FRONTEND_URL && origin === process.env.FRONTEND_URL) ||
+                      // Match frontend preview or staging URLs hosted on Vercel
+                      origin.startsWith('https://my-portfolio-version-2');
+                      
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  optionsSuccessStatus: 200,
 }))
 
 app.use(express.json())
