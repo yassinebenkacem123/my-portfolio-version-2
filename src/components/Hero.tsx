@@ -24,7 +24,7 @@ import frenchCV from '../cv-pdf/cv_frensh_version.pdf'
 /* Shared easing curve (Framer default spring-ish) */
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const SOCIAL_LINKS = [
+export const SOCIAL_LINKS = [
   {
     id: 'github',
     label: 'GitHub',
@@ -245,11 +245,11 @@ const CVDownloadModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgb(153,153,153)')}
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 6L6 18M6 6l12 12"/>
+                  <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <a
                 href={englishCV}
@@ -279,7 +279,7 @@ const CVDownloadModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
               >
                 English Version
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
                 </svg>
               </a>
               <a
@@ -310,7 +310,7 @@ const CVDownloadModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ i
               >
                 Télécharger le CV en Français
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
                 </svg>
               </a>
             </div>
@@ -329,210 +329,211 @@ const Hero: React.FC = () => {
       <CVDownloadModal isOpen={isCVModalOpen} onClose={() => setIsCVModalOpen(false)} />
       <section
         id="hero-section"
-      style={{
-        position: 'relative',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        overflowX: 'hidden',
-        backgroundColor: '#fff',
-        paddingTop: 100,
-        paddingBottom: 80,
-      }}
-    >
-      {/* ── Background image layer ── */}
-      <div className="hero-bg-wrap" aria-hidden="true">
-        <img
-          src="/background.png"
-          alt=""
-          className="hero-bg-img"
-          draggable={false}
-        />
-        <div className="hero-bg-vignette" />
+        style={{
+          position: 'relative',
+          width: '100%',
+          height:'95vh',
+          display: 'flex',
+          justifyContent: 'center',
+          overflowX: 'hidden',
+          backgroundColor: '#fff',
+          paddingTop: 100,
+          paddingBottom: 80,
+        }}
+      >
+        {/* ── Background image layer ── */}
+        <div className="hero-bg-wrap" aria-hidden="true">
+          <img
+            src="/background.png"
+            alt=""
+            className="hero-bg-img"
+            draggable={false}
+          />
+          <div className="hero-bg-vignette" />
 
-        {/* ── Left-hand accent image — bottom-left corner ── */}
-        <img
-          src="/left-hand.png"
-          alt=""
-          draggable={false}
-          className={[
-            /* positioning */
-            'absolute', 'bottom-0', 'left-0',
-            /* sizing — ~40% of hero width, capped */
-            'w-[38%]', 'max-w-[550px]', 'h-auto',
-            /* push it slightly off-screen left so it looks naturally cropped */
-            '-translate-x-[22%]', 'translate-y-[8%]',
-            /* blend the solid-black bg away on white */
-            'mix-blend-mode-multiply',
-            /* subtle opacity — hand is accent, not focal point */
-            'opacity-40',
-            /* no interaction */
-            'pointer-events-none', 'select-none',
-          ].join(' ')}
-          style={{
-            /* mix-blend-mode via style because TW v4 may not ship the utility by default */
-            mixBlendMode: 'multiply',
-            /* soft edge fade — mask fades left, bottom, and a touch at top */
-            WebkitMaskImage:
-              'linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), ' +
-              'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
-            WebkitMaskComposite: 'destination-in',
-            maskImage:
-              'linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), ' +
-              'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
-            maskComposite: 'intersect',
-            /* slight contrast lift so hand detail pops on white */
-            filter: 'contrast(1.08) brightness(1.02)',
-          }}
-        />
+          {/* ── Left-hand accent image — bottom-left corner ── */}
+          <img
+            src="/left-hand.png"
+            alt=""
+            draggable={false}
+            className={[
+              /* positioning */
+              'absolute', 'bottom-0', 'left-0',
+              /* sizing — ~40% of hero width, capped */
+              'w-[38%]', 'max-w-[550px]', 'h-auto',
+              /* push it slightly off-screen left so it looks naturally cropped */
+              '-translate-x-[22%]', 'translate-y-[8%]',
+              /* blend the solid-black bg away on white */
+              'mix-blend-mode-multiply',
+              /* subtle opacity — hand is accent, not focal point */
+              'opacity-40',
+              /* no interaction */
+              'pointer-events-none', 'select-none',
+            ].join(' ')}
+            style={{
+              /* mix-blend-mode via style because TW v4 may not ship the utility by default */
+              mixBlendMode: 'multiply',
+              /* soft edge fade — mask fades left, bottom, and a touch at top */
+              WebkitMaskImage:
+                'linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), ' +
+                'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
+              WebkitMaskComposite: 'destination-in',
+              maskImage:
+                'linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%), ' +
+                'linear-gradient(to top, transparent 0%, black 18%, black 100%)',
+              maskComposite: 'intersect',
+              /* slight contrast lift so hand detail pops on white */
+              filter: 'contrast(1.08) brightness(1.02)',
+            }}
+          />
 
-        {/* ── Decorative Crack Image — top-left corner ── */}
-        <img
-          src="/crack.png"
-          alt=""
-          draggable={false}
-          className="absolute  -top-24 -left-20 -rotate-25  w-[240px] md:w-[420px] opacity-50 md:opacity-30 pointer-events-none select-none z-0 mix-blend-multiply"
-        />
-      </div>
-      {/* ── All foreground content sits above the bg image ── */}
-      <div className="hero-content" style={{ width: '100%', display: 'contents' }}>
-        {/* ── Max-1080 container ── */}
-        <div className="portfolio-container" style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: 96 }}>
-   {/* Premium Animated Circular Badge — top-left absolute */}
+          {/* ── Decorative Crack Image — top-left corner ── */}
+          <img
+            src="/crack.png"
+            alt=""
+            draggable={false}
+            className="absolute  -top-24 -left-20 -rotate-25  w-[240px] md:w-[420px] opacity-50 md:opacity-30 pointer-events-none select-none z-0 mix-blend-multiply"
+          />
+        </div>
+        {/* ── All foreground content sits above the bg image ── */}
+        <div className="hero-content" style={{ width: '100%', display: 'contents' }}>
+          {/* ── Max-1080 container ── */}
+          <div className="portfolio-container" style={{ position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'column', gap: 96 }}>
+            {/* Premium Animated Circular Badge — top-left absolute */}
             <div style={{ position: 'absolute', top: -40, left: -30, zIndex: 10 }}>
               <RotatingHeroBadge />
             </div>
-          {/* ── LabelTitle block — exact Framer layout ── */}
-          <div style={{ position: 'relative', width: '100%' }}>
+            {/* ── LabelTitle block — exact Framer layout ── */}
+            <div style={{ position: 'relative', width: '100%' }}>
 
-         
 
-            {/* ── Main H1 headline — full-width, wraps naturally across two lines ── */}
-            <motion.h1
-              initial={{ opacity: 0, y: 36 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.07, ease: EASE }}
-              className="text-heading-1 text-center"
-              style={{
-                color: 'rgb(15,15,15)',
-                width: '100%',
-                paddingLeft: 120, /* clear the new circular badge */
-              }}
-            >
-              Software Engineering{' '}
-              <span
-                className="text-heading-1-italic"
-                style={{ color: 'rgb(51,51,51)' }}
+
+              {/* ── Main H1 headline — full-width, wraps naturally across two lines ── */}
+              <motion.h1
+                initial={{ opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.07, ease: EASE }}
+                className="text-heading-1 text-center"
+                style={{
+                  color: 'rgb(15,15,15)',
+                  width: '100%',
+                  paddingLeft: 120, /* clear the new circular badge */
+                }}
               >
-                and
-              </span> {' '}
-              Artificial Intelligence
-            </motion.h1>
-          </div>
-
-          {/* ── CtaDescription row ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.18, ease: EASE }}
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              gap: 32,
-            }}
-          >
-            {/* CTA column — primary + secondary buttons */}
-            <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
-              <ArrowBtn label="Let's work together" href="#contact" />
-              <DownloadBtn onClick={() => setIsCVModalOpen(true)} />
+                Software Engineering{' '}
+                <span
+                  className="text-heading-1-italic"
+                  style={{ color: 'rgb(51,51,51)' }}
+                >
+                  and
+                </span> {' '}
+                Artificial Intelligence
+              </motion.h1>
             </div>
 
-            {/* Description paragraph */}
-            <p
-              className="text-body-20-regular"
+            {/* ── CtaDescription row ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.18, ease: EASE }}
               style={{
-                color: 'rgb(76,76,76)',
-                maxWidth: 600,
-                flex: '1 1 320px',
-                lineHeight: '1.65em',
-              }}
-            >
-              Passionate about building intelligent and scalable digital solutions,
-              I specialize in software engineering and artificial intelligence.
-              I focus on creating impactful applications, clean user experiences,
-              and innovative systems that solve real-world problems.
-            </p>
-
-          </motion.div>
-        </div>
-
-        {/* ── Social icons — bottom-right of hero ── */}
-        <motion.div
-          initial={{ opacity: 0, x: 12 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
-          style={{
-            position: 'absolute',
-            bottom: 28,
-            right: 24,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 4,
-          }}
-        >
-          {SOCIAL_LINKS.map((s) => (
-            <a
-              key={s.id}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              title={s.label}
-              style={{
+                width: '100%',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: 36,
-                height: 36,
-                borderRadius: '50%',
-                color: 'rgb(153,153,153)',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background-color 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = s.color
-                el.style.transform = 'translateY(-3px) scale(1.15)'
-                el.style.backgroundColor = 'rgba(0,0,0,0.05)'
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement
-                el.style.color = 'rgb(153,153,153)'
-                el.style.transform = 'none'
-                el.style.backgroundColor = 'transparent'
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                flexWrap: 'wrap',
+                justifyContent: 'space-between',
+                gap: 32,
               }}
             >
-              <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
-                <path d={s.path} />
-              </svg>
-            </a>
-          ))}
+              {/* CTA column — primary + secondary buttons */}
+              <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+                <ArrowBtn label="Let's work together" href="#contact" />
+                <DownloadBtn onClick={() => setIsCVModalOpen(true)} />
+              </div>
 
-          {/* Vertical line */}
-          <div style={{
-            width: 1,
-            height: 44,
-            marginTop: 4,
-            background: 'linear-gradient(to bottom, rgba(153,153,153,0.35), transparent)',
-          }} />
-        </motion.div>
-      </div>{/* end hero-content */}
-    </section>
+              {/* Description paragraph */}
+              <p
+                className="text-body-20-regular"
+                style={{
+                  color: 'rgb(76,76,76)',
+                  maxWidth: 600,
+                  flex: '1 1 320px',
+                  lineHeight: '1.65em',
+                }}
+              >
+                Passionate about building intelligent and scalable digital solutions,
+                I specialize in software engineering and artificial intelligence.
+                I focus on creating impactful applications, clean user experiences,
+                and innovative systems that solve real-world problems.
+              </p>
+
+            </motion.div>
+          </div>
+
+          {/* ── Social icons — bottom-right of hero ── */}
+          <motion.div
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+            style={{
+              position: 'absolute',
+              bottom: 28,
+              right: 24,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            {SOCIAL_LINKS.map((s) => (
+              <a
+                key={s.id}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                title={s.label}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  color: 'rgb(153,153,153)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), background-color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.color = s.color
+                  el.style.transform = 'translateY(-3px) scale(1.15)'
+                  el.style.backgroundColor = 'rgba(0,0,0,0.05)'
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.color = 'rgb(153,153,153)'
+                  el.style.transform = 'none'
+                  el.style.backgroundColor = 'transparent'
+                }}
+              >
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+                  <path d={s.path} />
+                </svg>
+              </a>
+            ))}
+
+            {/* Vertical line */}
+            <div style={{
+              width: 1,
+              height: 44,
+              marginTop: 4,
+              background: 'linear-gradient(to bottom, rgba(153,153,153,0.35), transparent)',
+            }} />
+          </motion.div>
+        </div>{/* end hero-content */}
+      </section>
     </>
   )
 }

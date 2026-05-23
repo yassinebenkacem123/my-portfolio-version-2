@@ -39,8 +39,7 @@ a {
 
 button {
   font-family: inherit;
-  background: none;
-  border: none;
+  /* background: none; */
   cursor: pointer;
 }
 

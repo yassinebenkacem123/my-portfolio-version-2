@@ -2,53 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUp } from 'lucide-react';
+import { SOCIAL_LINKS } from './Hero';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const SOCIALS = [
-  {
-    name: 'Instagram',
-    href: 'https://www.instagram.com/',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="2" width="20" height="20" rx="5" />
-        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-      </svg>
-    ),
-  },
-  {
-    name: 'LinkedIn',
-    href: 'https://www.linkedin.com/',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    ),
-  },
-  {
-    name: 'X',
-    href: 'https://x.com/',
-    icon: (
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
-  {
-    name: 'YouTube',
-    href: 'https://www.youtube.com/',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
-        <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
-      </svg>
-    ),
-  },
-]
+const activeSocials = SOCIAL_LINKS.filter(s => s.href && s.href.trim() !== '' && s.href !== '#');
 
 const NAV_ROWS = [
   [
@@ -97,23 +55,10 @@ const Footer: React.FC = () => {
     <footer
       ref={footerRef}
       id="footer"
-      className="relative overflow-hidden pt-32 pb-0 text-white"
+      className="relative overflow-hidden pb-0 text-white"
       style={{ backgroundColor: '#000000' }}
     >
-      {/* ── Top Circular CTA Button ─────────────────────────────────────────── */}
-      <div className="w-full flex justify-center mb-32 gsap-footer-fade relative z-10">
-        <motion.button 
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-28 h-28 sm:w-32 sm:h-32 rounded-full flex flex-col items-center justify-center gap-2 group transition-all duration-500 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/[0.2] backdrop-blur-xl shadow-[0_0_40px_rgba(0,0,0,0.5)] cursor-pointer"
-        >
-          <ArrowUp size={24} className="text-white/50 group-hover:text-white group-hover:-translate-y-1 transition-all duration-300" />
-          <span className="text-[11px] font-medium uppercase tracking-[0.1em] text-white/50 group-hover:text-white font-['Space_Grotesk_Variable',sans-serif] text-center leading-tight">
-            Back<br/>To Top
-          </span>
-        </motion.button>
-      </div>
+   
 
       {/* "YASSINE" watermark — large, low-opacity, anchored to bottom */}
       <div
@@ -133,16 +78,18 @@ const Footer: React.FC = () => {
           <div className="flex flex-col gap-10 gsap-footer-fade">
             {/* Social Icons */}
             <div className="flex flex-row gap-4">
-              {SOCIALS.map(s => (
+              {activeSocials.map(s => (
                 <a
-                  key={s.name}
+                  key={s.id}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={s.name}
+                  aria-label={s.label}
                   className="w-12 h-12 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300"
                 >
-                  {s.icon}
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d={s.path} />
+                  </svg>
                 </a>
               ))}
             </div>
