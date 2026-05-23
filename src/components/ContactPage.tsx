@@ -91,7 +91,7 @@ const InputField: React.FC<InputFieldProps> = ({
     borderRadius: 12,
     padding: '14px 16px',
     fontFamily: 'Space Grotesk Variable, Space Grotesk, sans-serif',
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 400,
     color: '#fff',
     outline: 'none',
