@@ -142,8 +142,7 @@ const ProjectCard: React.FC<{ data: ProjectCardData; index: number }> = ({ data,
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.65, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-    className="w-full block group max-w-[600px]"
-    
+    className="block group w-[400px] md:w-[500px]  lg:w-[600px]"
   >
     <div className="w-full flex flex-col bg-[#111111] border border-white/10 rounded-[32px] p-4 sm:p-5 transition-colors duration-500 hover:border-white/20 hover:bg-[#131313] shadow-xl">
       
