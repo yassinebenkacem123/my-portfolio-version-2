@@ -164,9 +164,6 @@ const Footer: React.FC = () => {
           <p className="font-['Space_Grotesk_Variable',sans-serif] text-[13px] text-white/40 tracking-wide text-center sm:text-left">
             © {year} Yassine Benkacem. All rights reserved.
           </p>
-          <p className="font-['Space_Grotesk_Variable',sans-serif] text-[12px] text-white/30 text-center sm:text-right">
-            Designed &amp; built with React, Framer Motion &amp; TailwindCSS
-          </p>
         </div>
         
       </div>

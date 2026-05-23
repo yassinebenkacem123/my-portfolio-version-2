@@ -255,7 +255,7 @@ const GitHubContributionSection: React.FC<GitHubContributionSectionProps> = ({ u
       className="w-full bg-white flex justify-center"
       style={{ backgroundColor: 'rgb(15,15,15)', padding: '80px 0' }}
     >
-      <div className="w-[70%] flex flex-col gap-10">
+      <div className="w-[90%] lg:w-[70%] flex flex-col gap-10">
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <motion.div {...fadeUp(0)} className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
@@ -278,7 +278,7 @@ const GitHubContributionSection: React.FC<GitHubContributionSectionProps> = ({ u
 
           {/* Right: Stats */}
           {!loading && data && (
-            <div className="flex flex-row gap-3 sm:flex-shrink-0">
+            <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 w-full sm:w-auto sm:flex-shrink-0">
               <StatChip label="Contributions" value={data.totalContributions} delay={0.1} />
               {user && <StatChip label="Repos" value={user.public_repos} delay={0.15} />}
               {user && <StatChip label="Followers" value={user.followers} delay={0.2} />}
@@ -316,8 +316,10 @@ const GitHubContributionSection: React.FC<GitHubContributionSectionProps> = ({ u
                 </a>
               </div>
 
-              <div className="px-6  py-5">
-                <ContributionGrid weeks={data.weeks} />
+              <div className="px-6 py-5 overflow-x-auto">
+                <div className="min-w-[700px] lg:min-w-0">
+                  <ContributionGrid weeks={data.weeks} />
+                </div>
               </div>
 
               {/* Legend footer */}

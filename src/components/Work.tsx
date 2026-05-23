@@ -142,7 +142,7 @@ const ProjectCard: React.FC<{ data: ProjectCardData; index: number }> = ({ data,
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.65, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-    className="block group w-[400px] md:w-[500px]  lg:w-[600px]"
+    className="block group w-full md:w-[550px]"
   >
     <div className="w-full flex flex-col bg-[#111111] border border-white/10 rounded-[32px] p-4 sm:p-5 transition-colors duration-500 hover:border-white/20 hover:bg-[#131313] shadow-xl">
       
@@ -244,17 +244,15 @@ const Work: React.FC = () => {
   return (
     <section
       id="projects"
-      className="w-full flex justify-center overflow-visible"
+      className="w-full flex justify-center items-center overflow-visible"
       style={{ backgroundColor: 'rgb(15,15,15)', padding: '80px 0' }}
     >
       <div
-        className="portfolio-container flex flex-col lg:flex-row items-stretch lg:items-start"
-        style={{ gap: 40 }}
+        className="portfolio-container justify-center items-center lg:justify-between  gap-20 w-full flex flex-col  lg:flex-row"
+    
       >
         {/* Title & Categories (Mobile layout) */}
-        <div
-          className="lg:sticky lg:top-0 lg:h-[100vh] flex flex-col justify-start lg:justify-between items-start pt-0 lg:pt-[60px] shrink-0"
-        >
+        <div className="flex flex-col items-center justify-center lg:hidden w-full">
           <h2
             className="text-heading-2"
             style={{ color: '#fff', whiteSpace: 'nowrap' }}
@@ -263,7 +261,7 @@ const Work: React.FC = () => {
           </h2>
 
           {/* Categories bar - Visible on mobile/tablet under the title */}
-          <div className="flex flex-row flex-wrap gap-2.5 mt-6 lg:hidden w-full">
+          <div className="flex justify-center  flex-row flex-wrap gap-2.5 mt-6 w-full">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -288,8 +286,30 @@ const Work: React.FC = () => {
           </div>
         </div>
 
+        {/* Title (Desktop only) */}
+        <div
+          className="hidden lg:flex"
+          style={{
+            position: 'sticky',
+            top: 0,
+            height: '100vh',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            paddingTop: 60,
+            flexShrink: 0,
+          }}
+        >
+          <h2
+            className="text-heading-2"
+            style={{ color: '#fff', whiteSpace: 'nowrap' }}
+          >
+            My Projects
+          </h2>
+        </div>
+
         {/* ProjectsWrap */}
-        <div className="flex flex-col mt-4 lg:mt-[60px]" style={{ gap: 80, flex: 1, minWidth: 0 }}>
+        <div className="flex flex-col items-center :items-start w-full lg:mt-[60px]" style={{ gap: 80, flex: 1, minWidth: 0 }}>
           {filteredProjects.map((p, i) => (
             <ProjectCard key={p.name + i} data={p} index={i} />
           ))}
@@ -297,7 +317,18 @@ const Work: React.FC = () => {
 
         {/* CategoriesWrap (Desktop only, positioned on the right) */}
         <div
-          className="hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-[100vh] lg:justify-end lg:pb-[60px] shrink-0"
+          className="hidden  lg:flex"
+          style={{
+            position: 'sticky',
+            top: 0,
+            right:10,
+            height: '100vh',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-start',
+            paddingBottom: 60,
+            flexShrink: 0,
+          }}
         >
           <div className="flex flex-col" style={{ gap: 20 }}>
             {CATEGORIES.map((cat) => (
