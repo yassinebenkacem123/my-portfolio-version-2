@@ -216,7 +216,7 @@ const About: React.FC = () => {
 
           {/* KPI Cards — responsive grid, height 400px on desktop, auto on mobile */}
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 md:h-[400px] w-full"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:h-[400px] w-full"
             style={{
               flex: '1 1 500px',
               maxWidth: 780,

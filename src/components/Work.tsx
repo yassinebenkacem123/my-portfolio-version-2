@@ -14,14 +14,6 @@ const Linkedin = ({ className }: { className?: string }) => (
   </svg>
 )
 
-/*
- * WorksSection — Framer XML:
- *   backgroundColor: /Black 02   padding: 80px 0   layout: stack horizontal center
- *   Container max-1080 gap:40 horizontal start
- *     Title: sticky 100vh, "Our Work" sticky top:60
- *     ProjectsWrap: vertical gap:40
- *     CategoriesWrap: sticky 100vh, Categories sticky bottom:60
- */
 
 interface ProjectCardData {
   name: string
@@ -257,22 +249,12 @@ const Work: React.FC = () => {
       style={{ backgroundColor: 'rgb(15,15,15)', padding: '80px 0' }}
     >
       <div
-        className="portfolio-container flex flex-row items-start"
-        style={{ gap: 40, alignItems: 'flex-start' }}
+        className="portfolio-container flex flex-col lg:flex-row items-stretch lg:items-start"
+        style={{ gap: 40 }}
       >
-        {/* Title */}
+        {/* Title & Categories (Mobile layout) */}
         <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            paddingTop: 60,
-            flexShrink: 0,
-          }}
+          className="lg:sticky lg:top-0 lg:h-[100vh] flex flex-col justify-start lg:justify-between items-start pt-0 lg:pt-[60px] shrink-0"
         >
           <h2
             className="text-heading-2"
@@ -280,28 +262,43 @@ const Work: React.FC = () => {
           >
             My Projects
           </h2>
+
+          {/* Categories bar - Visible on mobile/tablet under the title */}
+          <div className="flex flex-row flex-wrap gap-2.5 mt-6 lg:hidden w-full">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className="text-body-16-regular transition-all duration-300"
+                style={{
+                  display: 'inline-block',
+                  color: activeFilter === cat ? '#0f0f0f' : 'rgba(255,255,255,0.6)',
+                  backgroundColor: activeFilter === cat ? '#fff' : 'transparent',
+                  border: '1px solid',
+                  borderColor: activeFilter === cat ? '#fff' : 'rgba(255,255,255,0.2)',
+                  borderRadius: 9999,
+                  padding: '8px 18px',
+                  fontSize: 14,
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer'
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* ProjectsWrap */}
-        <div className="flex flex-col" style={{ gap: 80, flex: 1 }}>
+        <div className="flex flex-col mt-4 lg:mt-[60px]" style={{ gap: 80, flex: 1, minWidth: 0 }}>
           {filteredProjects.map((p, i) => (
             <ProjectCard key={p.name + i} data={p} index={i} />
           ))}
         </div>
 
-        {/* CategoriesWrap */}
+        {/* CategoriesWrap (Desktop only, positioned on the right) */}
         <div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            alignItems: 'flex-start',
-            paddingBottom: 60,
-            flexShrink: 0,
-          }}
+          className="hidden lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-[100vh] lg:justify-end lg:pb-[60px] shrink-0"
         >
           <div className="flex flex-col" style={{ gap: 20 }}>
             {CATEGORIES.map((cat) => (
