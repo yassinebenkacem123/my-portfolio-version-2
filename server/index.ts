@@ -15,6 +15,7 @@ app.use(cors({
   origin: [
     'http://localhost:5173',
     'http://localhost:4173',
+    'https://my-portfolio-version-2.vercel.app',
     process.env.FRONTEND_URL, // set this in production
   ].filter(Boolean) as string[],
 }))
