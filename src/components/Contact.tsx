@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -7,31 +7,34 @@ import { ArrowRight } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PARTICLES = [
-  { id: 1, size: 2, top: '20%', left: '15%', delay: 0, duration: 15 },
-  { id: 2, size: 3, top: '65%', left: '25%', delay: 2, duration: 18 },
-  { id: 3, size: 2, top: '40%', left: '80%', delay: 4, duration: 14 },
-  { id: 4, size: 1, top: '80%', left: '70%', delay: 1, duration: 20 },
-  { id: 5, size: 3, top: '15%', left: '60%', delay: 3, duration: 16 },
-  { id: 6, size: 2, top: '75%', left: '10%', delay: 5, duration: 17 },
-];
+interface Shooter {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  len: number;
+  life: number;
+  maxLife: number;
+  opacity: number;
+}
 
 // ─── Nebula Aurora Canvas ────────────────────────────────────────────────────
-const AuroraCanvas = () => {
-  const canvasRef = useRef(null);
+export const AuroraCanvas = () => {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let raf;
+    if (!ctx) return;
+    let raf: number;
     let t = 0;
 
     // Shooting stars pool
-    const shooters = [];
+    const shooters: Shooter[] = [];
     let nextShooter = 0;
 
-    function spawnShooter(w) {
+    function spawnShooter(w: number) {
       const angle = (Math.random() * 25 + 15) * (Math.PI / 180); // 15-40 deg downward
       const speed = Math.random() * 4 + 4; // Slightly slower, more elegant
       shooters.push({
@@ -47,6 +50,7 @@ const AuroraCanvas = () => {
     }
 
     function resize() {
+      if (!canvas) return;
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     }
@@ -55,6 +59,7 @@ const AuroraCanvas = () => {
     ro.observe(canvas);
 
     function draw() {
+      if (!canvas || !ctx) return;
       const w = canvas.width;
       const h = canvas.height;
       ctx.clearRect(0, 0, w, h);
@@ -164,7 +169,7 @@ const AuroraCanvas = () => {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 const Contact = () => {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -328,7 +333,7 @@ const Contact = () => {
               onClick={() => navigate('/contact')}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="flex items-center gap-5 backdrop-blur-md border border-white/10 text-white px-6 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap"
+              className="flex items-center bg-linear-to-br from-white/10 to-black/30 gap-5 backdrop-blur-md border border-white/10 text-white px-6 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap"
             >
               <span className="font-['Space_Grotesk_Variable',sans-serif] text-[17px] font-medium tracking-wide">
                 Let's Get In Touch

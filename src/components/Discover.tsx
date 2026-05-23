@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 /*
  * DiscoverSection — Framer XML:
@@ -17,8 +17,62 @@ import { motion } from 'framer-motion'
 const BG =
   '/discover.png'
 
+const API_BASE = import.meta.env.VITE_API_URL ?? ''
+
 const Discover: React.FC = () => {
   const [email, setEmail] = useState('')
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (status === 'submitting') return
+
+    const trimmedEmail = email.trim()
+    if (!trimmedEmail) {
+      setStatus('error')
+      setErrorMsg('Please enter your email address.')
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedEmail)) {
+      setStatus('error')
+      setErrorMsg('Please enter a valid email address.')
+      return
+    }
+
+    setStatus('submitting')
+    setErrorMsg('')
+
+    try {
+      const response = await fetch(`${API_BASE}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: trimmedEmail }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        setStatus('success')
+        setEmail('')
+        // Auto reset success message after 5 seconds
+        setTimeout(() => {
+          setStatus('idle')
+        }, 5000)
+      } else {
+        setStatus('error')
+        setErrorMsg(data.error || 'Failed to submit email. Please try again.')
+      }
+    } catch (err) {
+      console.error('[Contact Form Error]', err)
+      setStatus('error')
+      setErrorMsg('Network error. Please check your connection and try again.')
+    }
+  }
 
   return (
     <section
@@ -166,7 +220,7 @@ const Discover: React.FC = () => {
                 padding: 24,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 48,
+                gap: 18,
               }}
             >
               {/* Text and Note */}
@@ -181,7 +235,7 @@ const Discover: React.FC = () => {
 
               {/* EmailForm — horizontal pill input */}
               <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -189,32 +243,96 @@ const Discover: React.FC = () => {
                   borderRadius: 9999,
                   padding: '6px 6px 6px 20px',
                   gap: 8,
+                  opacity: status === 'submitting' ? 0.7 : 1,
+                  transition: 'opacity 0.2s ease',
                 }}
               >
                 <input
                   type="email"
                   placeholder="Enter your email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                    if (status === 'error') setStatus('idle')
+                  }}
+                  disabled={status === 'submitting'}
                   className="text-body-16-regular flex-1 bg-transparent outline-none border-none min-w-0"
                   style={{ color: 'rgb(51,51,51)' }}
                 />
                 <button
                   type="submit"
-                  className="flex items-center justify-center rounded-full flex-shrink-0 transition-opacity hover:opacity-70"
+                  disabled={status === 'submitting'}
+                  className="flex items-center justify-center rounded-full flex-shrink-0 transition-all duration-200 hover:scale-105"
                   style={{
                     width: 40,
                     height: 40,
                     backgroundColor: 'rgb(51,51,51)',
                     border: 'none',
-                    cursor: 'pointer',
+                    cursor: status === 'submitting' ? 'not-allowed' : 'pointer',
                   }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  {status === 'submitting' ? (
+                    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                  ) : (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  )}
                 </button>
               </form>
+
+              {/* Submission Feedback */}
+              <AnimatePresence mode="wait">
+                {status === 'success' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginTop: 2 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-body-14-regular"
+                    style={{
+                      color: '#10b981',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      paddingLeft: 4,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span>Thank you! Your email was sent successfully.</span>
+                  </motion.div>
+                )}
+                {status === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: 'auto', marginTop: 1 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-body-14-regular"
+                    style={{
+                      color: '#ef4444',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      paddingLeft: 4,
+                      overflow: 'hidden',
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="12" />
+                      <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>{errorMsg}</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { githubRouter } from './routes/github.js'
+import { contactRouter } from './routes/contact.js'
 
 // Load environment variables from .env file
 dotenv.config()
@@ -22,6 +23,7 @@ app.use(express.json())
 
 // ── Routes ──────────────────────────────────────────────────────────────────
 app.use('/api/github', githubRouter)
+app.use('/api/contact', contactRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))

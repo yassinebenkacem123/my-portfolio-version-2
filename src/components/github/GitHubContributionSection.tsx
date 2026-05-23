@@ -332,7 +332,7 @@ const GitHubContributionSection: React.FC<GitHubContributionSectionProps> = ({ u
               {/* Recent Activity */}
               <Card delay={0.15}>
                 <CardHeader title="Recent Activity" icon={<GitCommit className="w-4 h-4" />} />
-                <div className="flex flex-col divide-y" style={{ divideColor: 'rgba(255,255,255,0.05)' }}>
+                <div className="flex flex-col divide-y divide-white/5">
                   {events.length === 0 ? (
                     <p className="px-6 py-8 text-sm text-center" style={{ color: 'rgba(255,255,255,0.25)' }}>No recent activity</p>
                   ) : events.map((ev, i) => (
@@ -366,7 +366,7 @@ const GitHubContributionSection: React.FC<GitHubContributionSectionProps> = ({ u
               {/* Top Repositories */}
               <Card delay={0.2}>
                 <CardHeader title="Top Repositories" icon={<Star className="w-4 h-4" />} />
-                <div className="flex flex-col divide-y" style={{ divideColor: 'rgba(255,255,255,0.05)' }}>
+                <div className="flex flex-col divide-y divide-white/5">
                   {repos.length === 0 ? (
                     <p className="px-6 py-8 text-sm text-center" style={{ color: 'rgba(255,255,255,0.25)' }}>No repositories found</p>
                   ) : repos.map((repo, i) => (

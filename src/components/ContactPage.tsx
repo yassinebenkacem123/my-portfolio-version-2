@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { Mail, Phone, MapPin, Send, ArrowLeft } from 'lucide-react'
+
+const API_BASE = import.meta.env.VITE_API_URL ?? ''
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Stagger animation helpers
@@ -151,15 +153,56 @@ const ContactPage: React.FC = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name || !form.email || !form.message) return
+    
+    const trimmedName = form.name.trim()
+    const trimmedEmail = form.email.trim()
+    const trimmedMessage = form.message.trim()
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setErrorMsg('Please fill in all fields.')
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedEmail)) {
+      setErrorMsg('Please enter a valid email address.')
+      return
+    }
+
     setSending(true)
-    // Simulate async send — replace with your actual form endpoint
-    await new Promise(r => setTimeout(r, 1200))
-    setSending(false)
-    setSent(true)
+    setErrorMsg('')
+
+    try {
+      const response = await fetch(`${API_BASE}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          message: trimmedMessage,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        setSent(true)
+        setForm({ name: '', email: '', message: '' })
+      } else {
+        setErrorMsg(data.error || 'Failed to send message. Please try again.')
+      }
+    } catch (err) {
+      console.error('[Contact Form Error]', err)
+      setErrorMsg('Network error. Please check your connection and try again.')
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -290,7 +333,10 @@ const ContactPage: React.FC = () => {
                     id="contact-name"
                     placeholder="Ex. John Doe"
                     value={form.name}
-                    onChange={v => setForm(f => ({ ...f, name: v }))}
+                    onChange={v => {
+                      setForm(f => ({ ...f, name: v }))
+                      if (errorMsg) setErrorMsg('')
+                    }}
                   />
                   <InputField
                     label="Email"
@@ -298,17 +344,50 @@ const ContactPage: React.FC = () => {
                     type="email"
                     placeholder="Ex. john@example.com"
                     value={form.email}
-                    onChange={v => setForm(f => ({ ...f, email: v }))}
+                    onChange={v => {
+                      setForm(f => ({ ...f, email: v }))
+                      if (errorMsg) setErrorMsg('')
+                    }}
                   />
                   <InputField
                     label="Message"
                     id="contact-message"
                     placeholder="Type your message..."
                     value={form.message}
-                    onChange={v => setForm(f => ({ ...f, message: v }))}
+                    onChange={v => {
+                      setForm(f => ({ ...f, message: v }))
+                      if (errorMsg) setErrorMsg('')
+                    }}
                     multiline
                     rows={5}
                   />
+
+                  <AnimatePresence>
+                    {errorMsg && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: 'auto', marginTop: 4 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeOut' }}
+                        className="text-sm"
+                        style={{
+                          color: '#ef4444',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 8,
+                          fontFamily: 'Space Grotesk Variable, Space Grotesk, sans-serif',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ flexShrink: 0 }}>
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="12" y1="8" x2="12" y2="12" />
+                          <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        <span>{errorMsg}</span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Submit button — full width white pill */}
                   <motion.button

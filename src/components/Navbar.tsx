@@ -27,15 +27,15 @@ const ArrowIcon = () => (
 const menuVariants = {
   hidden: { 
     y: '-100%', 
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const } 
   },
   visible: { 
     y: 0, 
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const } 
   },
   exit: { 
     y: '-100%', 
-    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.3 } 
+    transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] as const, delay: 0.3 } 
   }
 }
 
@@ -47,7 +47,7 @@ const linkItemVariants = {
     transition: {
       delay: 0.3 + i * 0.08,
       duration: 0.8,
-      ease: [0.33, 1, 0.68, 1],
+      ease: [0.33, 1, 0.68, 1] as const,
     },
   }),
   exit: { 
