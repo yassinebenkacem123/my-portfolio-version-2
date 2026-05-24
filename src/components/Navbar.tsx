@@ -68,10 +68,29 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* Lock body scroll while menu is open */
+  /* Lock body/document scroll while menu is open & control Lenis */
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+      if ((window as any).lenis) {
+        (window as any).lenis.stop()
+      }
+    } else {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      if ((window as any).lenis) {
+        (window as any).lenis.start()
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      if ((window as any).lenis) {
+        (window as any).lenis.start()
+      }
+    }
   }, [menuOpen])
 
   /* Close on Escape */
@@ -145,6 +164,7 @@ const Navbar: React.FC = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            data-lenis-prevent
             className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl text-neutral-900 flex justify-center overflow-y-auto overflow-x-hidden"
           >
             <div className="w-full max-w-[1080px] px-6 pt-32 pb-16 flex flex-col justify-between min-h-screen">
