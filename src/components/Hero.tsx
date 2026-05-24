@@ -505,7 +505,7 @@ const Hero: React.FC = () => {
               alignItems: 'center',
               gap: 4,
             }}
-            className='bottom-1 z-20'
+            className='-bottom-11 sm:bottom-1 z-20'
           >
             {SOCIAL_LINKS.map((s) => (
               <a
