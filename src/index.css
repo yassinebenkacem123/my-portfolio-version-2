@@ -165,7 +165,7 @@ input {
   max-width: 1150px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1170px) {
   .portfolio-container {
     padding-left: 16px;
     padding-right: 16px;

@@ -248,7 +248,7 @@ const Work: React.FC = () => {
       style={{ backgroundColor: 'rgb(15,15,15)', padding: '80px 0' }}
     >
       <div
-        className="portfolio-container justify-center items-center lg:justify-between  gap-20 w-full flex flex-col  lg:flex-row"
+        className="portfolio-container justify-center items-center lg:items-start lg:justify-between  gap-20 w-full flex flex-col  lg:flex-row"
     
       >
         {/* Title & Categories (Mobile layout) */}
