@@ -498,13 +498,14 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
             style={{
               position: 'absolute',
-              bottom: 28,
+            
               right: 24,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
               gap: 4,
             }}
+            className='bottom-1 z-20'
           >
             {SOCIAL_LINKS.map((s) => (
               <a
