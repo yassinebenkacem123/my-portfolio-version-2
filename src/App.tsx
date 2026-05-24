@@ -17,6 +17,7 @@ import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ContactPage from './components/ContactPage'
+import NotFoundPage from './components/NotFoundPage'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────────────
@@ -62,7 +63,7 @@ const AppRoutes: React.FC<{ isLoading: boolean }> = ({ isLoading }) => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<HomePage isLoading={isLoading} />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<h1>Not found</h1>} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AnimatePresence>
   )

@@ -127,7 +127,7 @@ const KpiCard2: React.FC = () => (
     {/* Description */}
     <div style={{ padding: '20px 0' }}>
       <p className="text-body-16-regular" style={{ color: 'rgb(90,90,90)', lineHeight: 1.5 }}>
-        Specialized in AI-driven systems, including LLMs, RAG pipelines, and intelligent agents integrated into real-world applications.
+        Specialized in AI-driven systems, including LLMs, RAG pipelines, and AI agents integrated into real-world applications.
       </p>
     </div>
   </motion.div>

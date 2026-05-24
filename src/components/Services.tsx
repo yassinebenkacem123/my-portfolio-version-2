@@ -14,7 +14,7 @@ interface SkillCategory {
 
 const SKILLS_DATA: SkillCategory[] = [
   {
-    category: 'Langages',
+    category: 'Languages',
     skills: ['Java', 'TypeScript', 'JavaScript', 'Python'],
   },
   {
@@ -23,27 +23,27 @@ const SKILLS_DATA: SkillCategory[] = [
   },
   {
     category: 'Backend',
-    skills: ['Spring Boot', 'Spring Data JPA', 'Spring AI', 'Express.js', 'FastAPI', 'APIs REST'],
+    skills: ['Spring Boot', 'Spring Data JPA', 'Spring AI', 'Express.js', 'FastAPI', 'REST APIs'],
   },
   {
-    category: 'Bases de données',
+    category: 'Databases',
     skills: ['PostgreSQL', 'MySQL', 'MongoDB', 'Sanity', 'pgvector'],
   },
   {
-    category: 'IA & systèmes intelligents',
+    category: 'AI & Intelligent Systems',
     skills: ['LLMs', 'RAG', 'MCP', 'TensorFlow', 'Keras', 'Scikit-learn', 'LangChain4j'],
   },
   {
-    category: 'Déploiement & cloud',
+    category: 'Deployment & Cloud',
     skills: ['Vercel', 'Railway', 'Render', 'GitHub Actions'],
   },
   {
-    category: 'Outils',
+    category: 'Tools',
     skills: ['Git', 'GitHub', 'Postman', 'Docker', 'Git Branching'],
   },
   {
     category: 'Concepts',
-    skills: ['Architecture REST', 'MVC', 'Clean Code', 'Tests API', 'Automatisation'],
+    skills: ['REST Architecture', 'MVC', 'Clean Code', 'API Testing', 'Automation'],
   },
 ]
 
@@ -81,7 +81,7 @@ const getSkillIcon = (skillName: string) => {
   if (s.includes('architecture') || s.includes('mvc')) return <Compass size={15} />
   if (s.includes('clean code')) return <TerminalSquare size={15} />
   if (s.includes('test')) return <CheckCircle size={15} />
-  if (s.includes('automatisation')) return <Settings size={15} />
+  if (s.includes('automatisation') || s.includes('automation')) return <Settings size={15} />
 
   return <TerminalSquare size={15} />
 }
@@ -189,7 +189,7 @@ const Services: React.FC = () => {
            className="mb-12 md:mb-16"
         >
           <span className="text-body-18-medium tracking-wide uppercase" style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>
-            Compétences Techniques
+            Technical Skills
           </span>
           <h2 className="text-heading-2 mt-4" style={{ color: '#fff' }}>
             My Skills
