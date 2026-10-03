@@ -4,12 +4,95 @@ import {
   Code2, FileCode, Layers, Palette, Hexagon,
   Server, Network, Database, Brain, Cpu, 
   Bot, Cloud, GitBranch, Box, Activity, 
-  CheckCircle, Settings, TerminalSquare, Compass
+  CheckCircle, Settings, TerminalSquare, Compass,
+  Sliders, Radio, Route, LifeBuoy, Boxes,
+  Shield, Key, Lock, ShieldCheck, Anchor, Workflow
 } from 'lucide-react'
 
 interface SkillCategory {
   category: string
   skills: string[]
+}
+
+const SKILL_DESCRIPTIONS: Record<string, string> = {
+  // Microservices & Spring Cloud
+  'Spring Boot': 'Microservices runtime & standalone service development',
+  'Spring Cloud': 'Distributed systems & microservices architecture patterns',
+  'Spring Cloud Config': 'Centralized external configuration management',
+  'Netflix Eureka': 'Dynamic service registration and discovery',
+  'Spring Cloud Gateway': 'Intelligent API routing, load balancing & cross-cutting security',
+  'OpenFeign': 'Declarative REST client for inter-service communication',
+  'Resilience4j': 'Fault tolerance: Circuit Breaker, Retry, Rate Limiter & Fallback',
+
+  // Event-Driven
+  'RabbitMQ': 'AMQP message broker for asynchronous event-driven messaging',
+  'Spring Cloud Stream': 'Event-driven streaming broker abstraction',
+  'Spring Cloud Function': 'Functional and decoupled serverless business logic',
+
+  // Security
+  'Keycloak': 'Identity & Access Management (IAM), SSO & centralized authentication',
+  'OAuth 2.0': 'Industry-standard protocol for authorization',
+  'OpenID Connect (OIDC)': 'Identity verification layer on top of OAuth 2.0',
+  'JWT': 'Stateless tokens for secure inter-service claims & authorization',
+
+  // Containers & DevOps
+  'Docker': 'Containerization of isolated microservices',
+  'Kubernetes': 'Container orchestration, scaling, and self-healing deployments',
+  'Helm': 'Kubernetes package manager for declarative deployment charts',
+
+  // Backend & Persistence
+  'Spring Data JPA': 'Data persistence and object-relational mapping (ORM)',
+  'Spring AI': 'Portable AI abstraction layer for generative AI & LLMs',
+  'Express.js': 'Minimalist Node.js web application framework',
+  'FastAPI': 'Modern high-performance Python web framework',
+  'REST APIs': 'RESTful API architecture and resource modeling',
+
+  // Languages
+  'Java': 'Core enterprise & microservices programming language',
+  'TypeScript': 'Typed superset of JavaScript for scalable applications',
+  'JavaScript': 'Dynamic scripting language for web applications',
+  'Python': 'Programming language for AI, data science, and scripting',
+
+  // Frontend
+  'React.js': 'Component-driven frontend UI development',
+  'Redux Toolkit': 'Predictable state management container',
+  'TailwindCSS': 'Utility-first CSS styling framework',
+  'Next.js': 'Production React framework with SSR and server components',
+  'Framer Motion': 'Production-ready animation library for React',
+  'shadcn/ui': 'Accessible, customizable UI component library',
+
+  // Databases
+  'PostgreSQL': 'Advanced open-source relational database',
+  'MySQL': 'Reliable structured SQL database system',
+  'MongoDB': 'Document-based NoSQL database',
+  'Sanity': 'Headless CMS for structured content management',
+  'pgvector': 'Vector embeddings database extension for PostgreSQL',
+
+  // AI & Intelligent Systems
+  'LLMs': 'Large Language Models integration and prompt engineering',
+  'RAG': 'Retrieval-Augmented Generation for grounded AI search',
+  'MCP': 'Model Context Protocol for modular agent tools',
+  'TensorFlow': 'Open-source platform for machine learning',
+  'Keras': 'High-level deep learning API',
+  'Scikit-learn': 'Predictive data analysis and machine learning in Python',
+  'LangChain4j': 'Java-native framework for LLM orchestration',
+
+  // Deployment & Cloud
+  'Vercel': 'Cloud deployment and edge network hosting',
+  'Railway': 'Infrastructure platform for full-stack deployments',
+  'Render': 'Unified cloud for building and running apps and databases',
+  'GitHub Actions': 'CI/CD automated testing and deployment workflows',
+
+  // Tools & Concepts
+  'Git': 'Distributed version control system',
+  'GitHub': 'Collaborative code hosting and version management',
+  'Postman': 'API design, testing, and debugging suite',
+  'Git Branching': 'Feature branching and collaboration workflows',
+  'REST Architecture': 'Stateless, cacheable client-server architectural style',
+  'MVC': 'Model-View-Controller design pattern',
+  'Clean Code': 'Maintainable, readable, and well-structured codebases',
+  'API Testing': 'Automated endpoint validation and integration testing',
+  'Automation': 'Scripting repetitive tasks and pipeline automation',
 }
 
 const SKILLS_DATA: SkillCategory[] = [
@@ -18,12 +101,28 @@ const SKILLS_DATA: SkillCategory[] = [
     skills: ['Java', 'TypeScript', 'JavaScript', 'Python'],
   },
   {
-    category: 'Frontend',
-    skills: ['React.js', 'Redux Toolkit', 'TailwindCSS', 'Next.js', 'Framer Motion', 'shadcn/ui'],
+    category: 'Microservices & Spring Cloud',
+    skills: ['Spring Boot', 'Spring Cloud', 'Spring Cloud Config', 'Netflix Eureka', 'Spring Cloud Gateway', 'OpenFeign', 'Resilience4j'],
+  },
+  {
+    category: 'Messaging & Event-Driven',
+    skills: ['RabbitMQ', 'Spring Cloud Stream', 'Spring Cloud Function'],
+  },
+  {
+    category: 'Security',
+    skills: ['Keycloak', 'OAuth 2.0', 'OpenID Connect (OIDC)', 'JWT'],
+  },
+  {
+    category: 'Containers & Orchestration',
+    skills: ['Docker', 'Kubernetes', 'Helm'],
   },
   {
     category: 'Backend',
-    skills: ['Spring Boot', 'Spring Data JPA', 'Spring AI', 'Express.js', 'FastAPI', 'REST APIs'],
+    skills: ['Spring Data JPA', 'Spring AI', 'Express.js', 'FastAPI', 'REST APIs'],
+  },
+  {
+    category: 'Frontend',
+    skills: ['React.js', 'Redux Toolkit', 'TailwindCSS', 'Next.js', 'Framer Motion', 'shadcn/ui'],
   },
   {
     category: 'Databases',
@@ -39,7 +138,7 @@ const SKILLS_DATA: SkillCategory[] = [
   },
   {
     category: 'Tools',
-    skills: ['Git', 'GitHub', 'Postman', 'Docker', 'Git Branching'],
+    skills: ['Git', 'GitHub', 'Postman', 'Git Branching'],
   },
   {
     category: 'Concepts',
@@ -50,7 +149,30 @@ const SKILLS_DATA: SkillCategory[] = [
 const getSkillIcon = (skillName: string) => {
   const s = skillName.toLowerCase()
   
-  // Langages
+  // Specific Microservices & Distributed Architecture
+  if (s.includes('spring boot')) return <Server size={15} />
+  if (s.includes('spring cloud stream')) return <Workflow size={15} />
+  if (s.includes('spring cloud function')) return <Code2 size={15} />
+  if (s.includes('config')) return <Sliders size={15} />
+  if (s.includes('eureka')) return <Radio size={15} />
+  if (s.includes('gateway')) return <Route size={15} />
+  if (s.includes('feign')) return <Network size={15} />
+  if (s.includes('resilience')) return <LifeBuoy size={15} />
+  if (s.includes('rabbit')) return <Boxes size={15} />
+  if (s.includes('spring cloud')) return <Cloud size={15} />
+
+  // Security & Identity
+  if (s.includes('keycloak')) return <Key size={15} />
+  if (s.includes('oauth')) return <Lock size={15} />
+  if (s.includes('openid') || s.includes('oidc')) return <ShieldCheck size={15} />
+  if (s.includes('jwt') || s.includes('security')) return <Shield size={15} />
+
+  // Containers & Orchestration
+  if (s.includes('kubernetes') || s.includes('k8s')) return <Boxes size={15} />
+  if (s.includes('helm')) return <Anchor size={15} />
+  if (s.includes('docker') || s.includes('container')) return <Box size={15} />
+
+  // Languages
   if (s.includes('java') && !s.includes('script')) return <FileCode size={15} />
   if (s.includes('script') || s.includes('ts') || s.includes('python')) return <Code2 size={15} />
 
@@ -74,7 +196,6 @@ const getSkillIcon = (skillName: string) => {
   // Cloud / Tools
   if (s.includes('vercel') || s.includes('railway') || s.includes('render')) return <Cloud size={15} />
   if (s.includes('github') || s.includes('git')) return <GitBranch size={15} />
-  if (s.includes('docker')) return <Box size={15} />
   if (s.includes('postman')) return <Activity size={15} />
 
   // Concepts
@@ -87,8 +208,9 @@ const getSkillIcon = (skillName: string) => {
 }
 
 const Ticker = ({ tags, reverse }: { tags: string[], reverse?: boolean }) => {
-  // 5 sets to guarantee width, x2 to ensure absolute looping overlap
-  const group = [...tags, ...tags, ...tags, ...tags, ...tags]
+  // Ensure enough copies so that short lists (e.g. 3 tags) loop seamlessly on all screen widths
+  const repeatCount = Math.max(5, Math.ceil(20 / tags.length))
+  const group = Array.from({ length: repeatCount }, () => tags).flat()
   const extended = [...group, ...group]
 
   return (
@@ -102,7 +224,8 @@ const Ticker = ({ tags, reverse }: { tags: string[], reverse?: boolean }) => {
       {extended.map((tag, i) => (
         <span 
           key={i} 
-          className="text-[13px] md:text-[15px] flex items-center gap-2 rounded-full flex-shrink-0 backdrop-blur-sm transition-colors hover:bg-white/10 cursor-default"
+          title={SKILL_DESCRIPTIONS[tag] || tag}
+          className="text-[13px] md:text-[15px] flex items-center gap-2 rounded-full flex-shrink-0 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30 cursor-default"
           style={{ 
             color: 'rgba(255,255,255,0.85)',
             border: '1px solid rgba(255,255,255,0.12)',
@@ -126,8 +249,8 @@ const SkillRow = ({ data, index }: { data: SkillCategory, index: number }) => {
         
         {/* Category Title */}
         <h3 
-          className="text-[32px] sm:text-[40px] md:text-[56px] font-light tracking-tight z-10 w-full md:w-3/4" 
-          style={{ letterSpacing: '-0.02em', lineHeight: 1.1 }}
+          className="text-[28px] sm:text-[38px] md:text-[46px] lg:text-[52px] font-light tracking-tight z-10 w-full md:w-3/4" 
+          style={{ letterSpacing: '-0.02em', lineHeight: 1.15 }}
         >
           <span className="text-white/30 group-hover:text-white transition-colors duration-500 cursor-default">
             {data.category}
@@ -208,3 +331,4 @@ const Services: React.FC = () => {
 }
 
 export default Services
+
